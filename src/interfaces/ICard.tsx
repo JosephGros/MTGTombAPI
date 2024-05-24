@@ -16,5 +16,4 @@ export interface ICard {
     keywords: string[];
     flavor_text?: string;
     id: string;
-  }
-  
+  }  

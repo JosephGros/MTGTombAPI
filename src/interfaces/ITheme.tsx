@@ -1,12 +1,9 @@
 import { ICard } from "./ICard";
 
-export interface ITheme {
+export interface IThemeBatch {
+    id: string;
     themeName: string;
     cards: ICard[];
-  }
-  
-  export interface IThemeBatch {
-    themeName: string;
-    themes: ITheme[];
-  }
+    v: number;
+}
   

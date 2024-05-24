@@ -1,8 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
-import { IDeck } from '../interfaces/IDeck';
 
-const deckSchema = new Schema<IDeck>({
-  cards: { type: [String], required: true }
+const deckSchema = new Schema({
+  name: { type: String, required: true },
+  cards: [{ type: Schema.Types.ObjectId, ref: 'Card' }]
 });
 
-export default mongoose.model<IDeck>('Deck', deckSchema);
+export default mongoose.model('Deck', deckSchema);

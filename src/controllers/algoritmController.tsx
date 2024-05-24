@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import CommanderBatch from '../models/topComModel';
 import ThemeBatch from '../models/themeModel';
-import Card from '../models/cardModel';
 import Deck from '../models/deckModel';
 import { ICommander } from '../interfaces/ITopCom';
-import { ITheme } from '../interfaces/ITheme';
+import { IThemeBatch } from '../interfaces/ITheme';
 import { ICard } from '../interfaces/ICard';
+
 export const getCommanderCards = async (req: Request, res: Response) => {
   const { commanderName } = req.body;
 
@@ -21,11 +21,10 @@ export const getCommanderCards = async (req: Request, res: Response) => {
 
     for (const batchName of batchNames) {
       console.log(`Querying for batch: ${batchName}`);
-      const batch = await CommanderBatch.findOne({ batchName });
+      const batch = await CommanderBatch.findOne({ batchName }, 'commanders');
       console.log(`Checking batch: ${batchName}, Found batch: ${!!batch}`);
       if (batch) {
-        console.log(`Batch content: ${JSON.stringify(batch.commanders.slice(0, 5))}`);
-        commander = batch.commanders.find((c:any) => c.name === commanderName) || null;
+        commander = batch.commanders.find((c: any) => c.name === commanderName) || null;
         if (commander) break;
       }
     }
@@ -40,51 +39,43 @@ export const getCommanderCards = async (req: Request, res: Response) => {
     const themeName = commander.themes[0];
     console.log('First theme:', themeName);
 
-    let theme: ITheme | null = null;
-    for (let i = 1; i <= 20; i++) {
-      const batch = await ThemeBatch.findOne({ themeName: `${themeName}_${i}` }) as ITheme | null;
-      console.log(`Checking theme batch: ${themeName}_${i}, Found batch: ${!!batch}`);
+    let themeBatch: IThemeBatch | null = null;
+    for (let i = 1; i <= 50; i++) {
+      const themeBatchName = `${themeName}_${i}`;
+      console.log(`Checking theme batch: ${themeBatchName}`);
+      const batch = await ThemeBatch.findOne({ themeName: themeBatchName }, 'cards');
+      console.log(`Found theme batch: ${!!batch}`);
       if (batch) {
-        console.log(`Theme batch content: ${JSON.stringify(batch)}`);
-        console.log(batch);
-        theme = {
-          themeName: batch.themeName,
-          cards: [batch] as unknown as ICard[]
-        };
-        break;
+        themeBatch = batch;
       }
     }
 
-    if (!theme) {
-      console.log('Theme not found');
-      return res.status(404).send('Theme not found');
+    if (!themeBatch) {
+      console.log('Theme batch not found');
+      return res.status(404).send('Theme batch not found');
     }
 
-    console.log('Theme found:', theme);
+    console.log('Theme batch found:', themeBatch);
 
-    const cards = theme.cards;
+    const cardCountsMap = new Map<string, { count: number, cardInfo: ICard }>();
 
-    const cardDeckCounts = await Promise.all(cards.map(async (card: ICard) => {
-      const count = await Deck.countDocuments({ cards: card.name });
-      return { cardName: card.name, count };
+    await Promise.all(themeBatch.cards.map(async (card: ICard) => {
+      const cardName = card.name.trim().toLowerCase();
+      const count = await Deck.countDocuments({ 'cards.name': card.name });
+      if (cardCountsMap.has(cardName)) {
+        cardCountsMap.get(cardName)!.count += count;
+      } else {
+        cardCountsMap.set(cardName, { count, cardInfo: card });
+      }
     }));
 
-
+    const cardDeckCounts = Array.from(cardCountsMap, ([name, { count, cardInfo }]) => ({ name, count, cardInfo }));
     cardDeckCounts.sort((a, b) => b.count - a.count);
 
-    const sortedCardsByType: { [key: string]: ICard[] } = {};
-    for (const { cardName } of cardDeckCounts) {
-      const card = await Card.findOne({ name: cardName });
-      if (card) {
-        if (!sortedCardsByType[card.type_line]) sortedCardsByType[card.type_line] = [];
-        sortedCardsByType[card.type_line].push(card);
-      }
-    }
+    console.log('Sorted card deck counts:', cardDeckCounts);
 
-    console.log('Sorted cards by type:', sortedCardsByType);
-
-    res.json(sortedCardsByType);
-  } catch (error:any) {
+    res.json(cardDeckCounts);
+  } catch (error: any) {
     console.error('Error processing request:', error.message);
     res.status(500).send(error.message);
   }

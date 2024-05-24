@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 import { ICard } from '../interfaces/ICard';
 
 const cardSchema = new Schema<ICard>({
@@ -12,13 +12,13 @@ const cardSchema = new Schema<ICard>({
     large: { type: String, required: true },
     png: { type: String, required: true },
     art_crop: { type: String, required: true },
-    border_crop: { type: String, required: true }
+    border_crop: { type: String, required: true },
   },
   rarity: { type: String, required: true },
   color_identity: { type: [String], required: true },
   keywords: { type: [String], required: true },
   flavor_text: { type: String, required: false },
-  id: { type: String, required: true }
+  id: { type: String, required: true },
 });
 
 export default mongoose.model<ICard>('Card', cardSchema);
