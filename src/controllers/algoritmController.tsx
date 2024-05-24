@@ -74,7 +74,60 @@ export const getCommanderCards = async (req: Request, res: Response) => {
 
     console.log('Sorted card deck counts:', cardDeckCounts);
 
-    res.json(cardDeckCounts);
+    const sortedCardsByType: { [key: string]: any[] } = {
+      creatures: [],
+      artifacts: [],
+      enchantments: [],
+      instants: [],
+      sorceries: [],
+      planeswalkers: [],
+      lands: []
+    };
+
+    // Classify cards by their type
+    cardDeckCounts.forEach(({ name, count, cardInfo }) => {
+      const typeKeywords = cardInfo.type_line.split(' — ')[0].split(' ');
+      const cardType = typeKeywords.find(keyword => [
+        'Creature', 'Artifact', 'Enchantment', 'Instant', 'Sorcery', 'Planeswalker', 'Land'
+      ].includes(keyword));
+
+      if (cardType) {
+        switch (cardType) {
+          case 'Creature':
+            sortedCardsByType.creatures.push({ name, count, cardInfo });
+            break;
+          case 'Artifact':
+            sortedCardsByType.artifacts.push({ name, count, cardInfo });
+            break;
+          case 'Enchantment':
+            sortedCardsByType.enchantments.push({ name, count, cardInfo });
+            break;
+          case 'Instant':
+            sortedCardsByType.instants.push({ name, count, cardInfo });
+            break;
+          case 'Sorcery':
+            sortedCardsByType.sorceries.push({ name, count, cardInfo });
+            break;
+          case 'Planeswalker':
+            sortedCardsByType.planeswalkers.push({ name, count, cardInfo });
+            break;
+          case 'Land':
+            sortedCardsByType.lands.push({ name, count, cardInfo });
+            break;
+          default:
+            break;
+        }
+      }
+    });
+
+    // Sort cards within each type by count
+    for (const cardType in sortedCardsByType) {
+      sortedCardsByType[cardType].sort((a, b) => b.count - a.count);
+    }
+
+    console.log('Sorted cards by type:', sortedCardsByType);
+
+    res.json(sortedCardsByType);
   } catch (error: any) {
     console.error('Error processing request:', error.message);
     res.status(500).send(error.message);
