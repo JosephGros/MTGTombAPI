@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "esnext",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "types": ["node", "express", "cors", "mongoose", "dotenv"]
+    "jsx": "react",
+    "outDir": "./dist"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
