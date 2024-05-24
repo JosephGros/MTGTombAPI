@@ -6,37 +6,10 @@ import { ICommander } from '../interfaces/ITopCom';
 import { IThemeBatch } from '../interfaces/ITheme';
 import { ICard } from '../interfaces/ICard';
 
-export const getCommanderCards = async (req: Request, res: Response) => {
-  const { commanderName } = req.body;
+export const getComThemeCards = async (req: Request, res: Response) => {
+    const { themeName } = req.body;
 
-  console.log('Received request with commanderName:', commanderName);
-
-  try {
-    let commander: ICommander | null = null;
-    const batchNames = [
-      'Top 0-2000 Commanders',
-      'Top 2000-4000 Commanders',
-      'Top 4000-4894 Commanders'
-    ];
-
-    for (const batchName of batchNames) {
-      console.log(`Querying for batch: ${batchName}`);
-      const batch = await CommanderBatch.findOne({ batchName }, 'commanders');
-      console.log(`Checking batch: ${batchName}, Found batch: ${!!batch}`);
-      if (batch) {
-        commander = batch.commanders.find((c: any) => c.name === commanderName) || null;
-        if (commander) break;
-      }
-    }
-
-    if (!commander) {
-      console.log('Commander not found');
-      return res.status(404).send('Commander not found');
-    }
-
-    console.log('Commander found:', commander);
-
-    const themeName = commander.themes[0];
+    try {
     console.log('First theme:', themeName);
 
     let themeBatch: IThemeBatch | null = null;
