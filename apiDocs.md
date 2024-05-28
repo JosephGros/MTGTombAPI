@@ -19,11 +19,12 @@ https://MTGTombAPI.onrender.com/api
 
 Algorithm for Recommendations
 Algorithm for Theme Recommendations
+Top Commanders
+Top Commanders for Each Theme
 Themes
 Precons
 Decks
-Top Commanders
-Top Commanders for Each Theme
+Action Words
 
 ## Model URIs
 
