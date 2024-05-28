@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import TopCommander from "../models/topComModel";
 
-const seeAllTopComs = async () => {
-  const precons = await TopCommander.find();
+const seeAllTopComs = async (page: number, limit: number) => {
+  const skip = (page - 1) * limit;
+  const precons = await TopCommander.find().skip(skip).limit(limit);
   return precons;
 };
 
@@ -20,7 +21,9 @@ const seeOneTopComByName = async (name: string) => {
 
 export const getAllTopComs = async (req: Request, res: Response) => {
   try {
-    const precons = await seeAllTopComs();
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 50;
+    const precons = await seeAllTopComs(page, limit);
     res.json(precons);
   } catch (error: any) {
     res.status(500).json({ error: error.message });

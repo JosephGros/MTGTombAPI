@@ -12,7 +12,7 @@ export const getAllDecks = async (
     const options = {
       page: Number(page),
       limit: Number(limit),
-      select: 'deckName color'
+      select: "deckName color",
     };
 
     const result = await Deck.paginate(query, options);
