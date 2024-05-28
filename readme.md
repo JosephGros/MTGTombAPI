@@ -1,6 +1,6 @@
 # Welcome to MTG Tomb API
 
-This API is for the one and only website MTG Tomb. https://mtg-tomb.netlify.app/
+This API is for the one and only webiste MTG Tomb. https://mtg-tomb.netlify.app/
 
 
 ## MTG Tomb API Documentation
@@ -69,25 +69,10 @@ Top Commanders for Each Theme
 - Then compare those cards and count how many decks they are in to get an estimate.
 - Send back to the user at MTG Tomb.
 
-_request body in form of json:_
-
-```json
-{
-  "commanderName": "The name of the chosen commander goes here"
-}
-```
-
-_example_
-
-```json
-{
-  "commanderName": "Atraxa, Praetors' Voice"
-}
-```
-
-So when request is made have is made under **commanderName:** so that the API gets the right format.
 
 **_The result :_**
+
+https://MTGTombAPI.onrender.com/api/recommendation/:commanderName
 
 _Sorted in these types -_
 
@@ -104,6 +89,8 @@ _Sorted in these types -_
 _Within the types -_ Sorted after count.
 
 _Result example -_
+
+https://MTGTombAPI.onrender.com/api/recommendation/Atraxa,%20Praetors%27%20Voice
 
 ```json
 {

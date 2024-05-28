@@ -7,9 +7,9 @@ import { IThemeBatch } from "../interfaces/ITheme";
 import { ICard } from "../interfaces/ICard";
 
 export const getCommanderCards = async (req: Request, res: Response) => {
-  const { commanderName } = req.body;
+  const { commanderName } = req.params;
 
-  console.log("Received request with commanderName:", commanderName);
+  console.log("Received request with commanderName:", decodeURIComponent(commanderName));
 
   try {
     let commander: ICommander | null = null;

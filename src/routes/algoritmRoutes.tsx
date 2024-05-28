@@ -4,7 +4,7 @@ import { getComThemeCards } from '../controllers/themeAlgoritm';
 
 const recomendationrouter = express.Router();
 
-recomendationrouter.get('/recommendation', getCommanderCards);
+recomendationrouter.get('/recommendation/:commanderName', getCommanderCards);
 recomendationrouter.get('/theme/recommendation', getComThemeCards);
 
 export default recomendationrouter;
