@@ -1,3 +1,8 @@
+# Welcome to MTG Tomb API
+
+This API is for the one and only webiste MTG Tomb. https://mtg-tomb.netlify.app/
+
+
 ## MTG Tomb API Documentation
 
 **_Base URI_**
