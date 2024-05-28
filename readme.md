@@ -130,7 +130,7 @@ https://MTGTombAPI.onrender.com/api/recommendation/Atraxa,%20Praetors%27%20Voice
 
 **_URI for this request_**
 
-**GET** - https://MTGTombAPI.onrender.com/api/theme/recommendation
+**GET** - https://MTGTombAPI.onrender.com/api/theme/recommendation/:themeName
 
 #### Theme recommendations
 

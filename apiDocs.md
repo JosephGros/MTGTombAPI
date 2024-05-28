@@ -124,7 +124,7 @@ _Result example -_
 
 **_URI for this request_**
 
-**GET** - https://MTGTombAPI.onrender.com/api/theme/recommendation
+**GET** - https://MTGTombAPI.onrender.com/api/theme/recommendation/:themeName
 
 #### Theme recommendations
 
@@ -163,7 +163,7 @@ _example_
 }
 ```
 
-So when request is made have is made under **themeName:** so that the API gets the right format.
+So when request is made have it made under **themeName:** so that the API gets the right format.
 
 **_The result structure :_**
 

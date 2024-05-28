@@ -7,7 +7,7 @@ import { IThemeBatch } from "../interfaces/ITheme";
 import { ICard } from "../interfaces/ICard";
 
 export const getComThemeCards = async (req: Request, res: Response) => {
-  const { themeName } = req.body;
+  const { themeName } = req.params;
 
   try {
     console.log("First theme:", themeName);
