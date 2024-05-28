@@ -1,7 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { ICommanderBatch } from '../interfaces/ITopCom';
+import mongoose, { Schema, Document } from "mongoose";
+import { ICommanderBatch } from "../interfaces/ITopCom";
 
-const CommanderSchema: Schema = new Schema({
+const TopCommander: Schema = new Schema({
   batchName: { type: String, required: true },
   commanders: [
     {
@@ -13,4 +13,8 @@ const CommanderSchema: Schema = new Schema({
   ],
 });
 
-export default mongoose.model<ICommanderBatch & Document>('CommanderBatch', CommanderSchema, 'topcommanders');
+export default mongoose.model<ICommanderBatch & Document>(
+  "CommanderBatch",
+  TopCommander,
+  "topcommanders"
+);

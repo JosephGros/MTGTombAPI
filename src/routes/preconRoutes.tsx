@@ -1,11 +1,9 @@
-// import { Router } from "express";
+import { Router } from "express";
+import { getAllPrecons, getPrecon } from "../controllers/preconController";
 
-// const preconRouter = Router();
+const preconRouter = Router();
 
-// preconRouter.get("/", getAllPrecons);
-// preconRouter.post("/", addPrecon);
-// preconRouter.get("/:id", getPrecon);
-// preconRouter.put("/:id", updatePrecon);
-// preconRouter.delete("/:id", deletePrecon);
+preconRouter.get("/precons", getAllPrecons);
+preconRouter.get("/precons/:name", getPrecon);
 
-// export default preconRouter;
+export default preconRouter;

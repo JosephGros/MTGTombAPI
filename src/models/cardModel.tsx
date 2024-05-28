@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { ICard } from '../interfaces/ICard';
+import mongoose, { Schema, Document } from "mongoose";
+import { ICard } from "../interfaces/ICard";
 
 const cardSchema = new Schema<ICard>({
   name: { type: String, required: true },
@@ -21,4 +21,4 @@ const cardSchema = new Schema<ICard>({
   id: { type: String, required: true },
 });
 
-export default mongoose.model<ICard>('Card', cardSchema);
+export default mongoose.model<ICard>("Card", cardSchema);
