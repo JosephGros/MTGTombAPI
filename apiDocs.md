@@ -64,25 +64,10 @@ Top Commanders for Each Theme
 - Then compare those cards and count how many decks they are in to get an estimate.
 - Send back to the user at MTG Tomb.
 
-_request body in form of json:_
-
-```json
-{
-  "commanderName": "The name of the chosen commander goes here"
-}
-```
-
-_example_
-
-```json
-{
-  "commanderName": "Atraxa, Praetors' Voice"
-}
-```
-
-So when request is made have is made under **commanderName:** so that the API gets the right format.
 
 **_The result :_**
+
+https://MTGTombAPI.onrender.com/api/recommendation/%28MKM%29---Revenant-Recon.json
 
 _Sorted in these types -_
 
