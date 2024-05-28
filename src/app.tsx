@@ -9,6 +9,7 @@ import themeRouter from './routes/themeRoutes';
 import preconReleaseRouter from './routes/releasePreRoutes';
 import deckRouter from './routes/deckRoutes';
 import actioWordsRouter from './routes/actionWordsRoute';
+import gameMechanicsRouter from './routes/gameMechanicsRoute';
 
 const app = express();
 app.use(cors());
@@ -31,5 +32,6 @@ app.use('/api', themeRouter);
 app.use('/api', preconReleaseRouter);
 app.use('/api', deckRouter);
 app.use('/api', actioWordsRouter);
+app.use('/api', gameMechanicsRouter);
 
 export default app;

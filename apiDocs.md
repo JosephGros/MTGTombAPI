@@ -14,6 +14,7 @@ https://MTGTombAPI.onrender.com/api
 - [Precons Releases](#precon-releases)
 - [Decks](#decks)
 - [Action Words](#action-words)
+- [Game Mechanics](#game-mechanics)
 
 ## Identify resources
 
@@ -1073,9 +1074,9 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 
 ### All the Action Words sorted by letter
 
-| [A](#a) | [C](#c) | [D](#d) | [E](#e) | [F](#f) | [R](#r) | [S](#s) | [T](#t) | [U](#u) | [V](#v) | [Z](#z) |
+| [A](#a1) | [C](#c1) | [D](#d1) | [E](#e1) | [F](#f1) | [R](#r1) | [S](#s1) | [T](#t1) | [U](#u1) | [V](#v1) | [Z](#z1) |
 
-##### A
+##### A1
 
 - Adapt
 - Activate
@@ -1083,7 +1084,7 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 - Amass
 - Assemble
 
-##### C
+##### C1
 
 - Cast
 - Clash
@@ -1093,7 +1094,7 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 - Counter
 - Convert
 
-##### D
+##### D1
 
 - Destroy
 - Detain
@@ -1101,13 +1102,13 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 - Discard
 - Double
 
-##### E
+##### E1
 
 - Exchange
 - Exert
 - Exile
 
-##### F
+##### F1
 
 - Fateseal
 - Fight
@@ -1118,13 +1119,13 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 - Play
 - Protect
 
-##### R
+##### R1
 
 - Regenerate
 - Reveal
 - Role token
 
-##### S
+##### S1
 
 - Sacrifice
 - Scry
@@ -1132,24 +1133,546 @@ https://MTGTombAPI.onrender.com/api/actionwords/letter/U
 - Shuffle
 - Support
 
-##### T
+##### T1
 
 - Tap
 - Time Travel
 - Transform
 - Treasure
 
-##### U
+##### U1
 
 - Untap
 
-##### V
+##### V1
 
 - Venture into the dungeon
 - Vote
 - Vent
 
-##### Z
+##### Z1
 
 - Zone
 
+
+
+## Game Mechanics
+
+- [All Game Mechanics](#all-game-mechanics)
+- [One Game Mechanic](#one-game-mechanics)
+- [All Game Mechanics for One Letter](#all-game-mechanics-for-one-letter)
+- [All Game Mechanics sorted after letter](#all-the-game-mechanics-sorted-by-letter)
+
+**_URI for this request_**
+
+**GET** - https://MTGTombAPI.onrender.com/api/gamemechanics
+
+**| When puting filters on letters or searching for specifik word its case sensitive so it need to be capital letter in the beginning |**
+
+#### All Game Mechanics
+
+**_The process :_**
+
+- User want's to understand some of the Game Mechanics that are used in the game.
+- Then here's a request to help the user learn what the Game Mechanics mean.
+
+_Result example -_
+
+```json
+[
+  {
+    "_id": "66561bf23d1828aa56785ab0",
+    "keyword": "Absorb",
+    "description": ": This keyword ability allows a creature to gain life whenever it deals damage to a player. For example, if a creature with Absorb deals 3 damage to a player, its controller gains 3 life."
+  },
+  {
+    "_id": "66561bf23d1828aa56785ab1",
+    "keyword": "Acidrain",
+    "description": ": Acidrain is likely a spell that deals damage or has some detrimental effect to lands or creatures, akin to the effects of acid. It might destroy lands or deal damage to creatures."
+  },
+  {
+    "_id": "66561bf23d1828aa56785ab2",
+    "keyword": "Afflict",
+    "description": ": Afflict is a keyword ability often found on creatures. When a creature with Afflict becomes blocked, the defending player must choose whether to lose life equal to the creature's Afflict value or let the creature through unblocked."
+  },
+  {
+    "_id": "66561bf23d1828aa56785ab3",
+    "keyword": "Affinity",
+    "description": ": Affinity is a keyword ability that reduces the cost of a spell or permanent for each certain type of permanent you control. For example, a spell with Affinity for artifacts might cost one less to cast for each artifact you control."
+  },
+  {}
+]
+```
+
+#### One Game Mechanic
+
+**_URI for this request_**
+
+**GET** - https://MTGTombAPI.onrender.com/api/gamemechanics/:name
+
+**_The process :_**
+
+- User want's to understand some of the Game Mechanic that are used in the game.
+- Then here's a request to help the user learn what the Game Mechanic mean.
+
+_Result example -_
+
+https://MTGTombAPI.onrender.com/api/gamemechanics/Undo
+
+```json
+{
+  "_id": "66561bf23d1828aa56785c8b",
+  "keyword": "Undo",
+  "description": ": Undo is likely a mechanic or effect that involves reversing or nullifying previous actions or events within the game, possibly to correct mistakes or undo changes."
+}
+
+```
+
+#### All Game Mechanics for One Letter
+
+**_URI for this request_**
+
+**GET** - https://MTGTombAPI.onrender.com/api/gamemechanics/letter/:letter
+
+**_The process :_**
+
+- User want's to understand some of the Game Mechanics that are used in the game.
+- Then here's a request to help the user learn what the Game Mechanics mean.
+
+_Result example -_
+
+https://MTGTombAPI.onrender.com/api/gamemechanics/letter/U
+
+```json
+[
+  {
+    "_id": "66561bf23d1828aa56785c8b",
+    "keyword": "Undo",
+    "description": ": Undo is likely a mechanic or effect that involves reversing or nullifying previous actions or events within the game, possibly to correct mistakes or undo changes."
+  },
+  {
+    "_id": "66561bf23d1828aa56785c8c",
+    "keyword": "Unleash",
+    "description": ": Unleash is likely a mechanic or effect that involves releasing or freeing game elements within the game, possibly from confinement or suppression."
+  },
+  { ... }
+]
+
+```
+
+### All the Game Mechanics sorted by letter
+
+| [A](#a2) | [B](#b2) | [C](#c2) | [D](#d2) | [E](#e2) | [F](#f2) | [G](#g2) | [H](#h2) | [I](#i2) | [K](#k2) | [L](#l2) | [M](#m2) | [N](#n2) | [O](#o2) | [P](#p2) | [Q](#q2) | [R](#r2) | [S](#s2) | [T](#t2) | [U](#u2) | [V](#v2) | [W](#w2) | [X](#x2) | [Y](#y2) | [Z](#z2) |
+
+##### A2
+
+- Absorb
+- Acidrain
+- Afflict
+- Affinity
+- Afterlife
+- Aftermath
+- Agenda
+- Agile
+- Amplify
+- Ancestor's Reminder
+
+##### B2
+
+- Belch
+- Bestow
+- Birthday
+- Blackout
+- Blitz
+- Bloodthirst
+- Bounce
+- Bounty
+- Build Around
+- Bushido
+
+##### C2
+
+- Catalyze
+- Center of Attention
+- Champion
+- Change
+- Changeling
+- Channel
+- Choose a background
+- Cipher
+- Cleave
+- Collaborate
+- Collaboration
+- Companion
+- Complete
+- Compleated
+- Conduit
+- Confidant
+- Conjure
+- Conspiracy
+- Conspire
+- Constrict
+- Contain
+- Contraption
+- Cooperate
+- Copy
+- Corrupt
+- Craft
+- Crafty
+- Crew
+- Crossbreed
+- Crystallize
+- Cumulative upkeep
+- Curse
+- Curse of Opulence
+
+##### D2
+
+- Daybound
+- Dead Man's Chest
+- Deathtouch
+- Decepticon
+- Defend
+- Defender
+- Defile
+- Delve
+- Demonstrate
+- Deny
+- Depth
+- Destroy
+- Destructive
+- Devour
+- Diamond
+- Disguise
+- Dislodge
+- Dismember
+- Dispel
+- Disrupt
+- Dissolve
+- Disturb
+- Dodge
+- Double agenda
+- Double strike
+- Dowse
+- Drain
+- Draw
+- Dredge
+- Drop
+- Dualcaster
+- Duplicate
+
+##### E2
+
+- Echo
+- Edge
+- Empower
+- Enchant
+- Encore
+- Encounter
+- Endgame
+- Endless
+- Energy
+- Engine
+- Enhance
+- Entangle
+- Entwine
+- Epic
+- Escape
+- Eternalize
+- Evade
+- Evolve
+- Evolution
+- Exhaust
+- Exile
+- Expedition
+- Experiment
+- Exploit
+- Explosive
+- Extend
+- Extort
+- Extra Life
+- Eye
+
+##### F2
+
+- Fast
+- Fast Forward
+- Fast Break
+- Feedback
+- Feint
+- Field
+- Fight
+- Fire
+- First strike
+- Flanking
+- Flash
+- Flashback
+- Flashpoint
+- Flavor
+- Flicker
+- Flip
+- Flying
+- Follow
+- Forecast
+- Foretell
+- Forge
+- Forge a Team
+- Forging Bonds
+- Form
+- Forsake
+- Fortify
+- Found
+- Freeze
+- Frenzy
+- Friendly Fire
+- Friends forever
+- Frighten
+- Fuse
+- Fusion
+
+##### G2
+
+- Gamble
+- Gather
+- Glitch
+- Goad
+- Gravestorm
+- Gravity
+- Greed
+- Green Light
+- Grind
+- Groom
+- Grow
+- Grudge
+- Guard
+- Gush
+- Gust
+
+##### H2
+
+- Haunt
+- Havoc
+- Headbutt
+- Hideaway
+- Hidden
+- Hideous Laughter
+- Hit
+- Hit and Run
+- Hoist
+- Honor
+- Host
+- Humanize
+- Hunt
+- Hybrid
+
+##### I2
+
+- Ignite
+- Illusion
+- Illuminate
+- Imbue
+- Immobilize
+- Improvise
+- Infect
+- Infiltrate
+- Infuse
+- Ingest
+- Intensity
+- Intimidate
+
+##### K2
+
+- Keen
+- Key
+- Kick
+- Kicker
+- Kickoff
+- Knockout
+
+##### L2
+
+- Landwalk
+- Larceny
+- Last Stand
+- Legacy
+- Legendary landwalk
+- Lend
+- Level Up
+- Liberate
+- Lie
+- Life Link
+- Lifeblood
+- LifeLink
+- Lifelink
+- Lightspeed
+- Linger
+- Link
+- Living metal
+- Living weapon
+- Lose
+- Lost in the Shuffle
+- Lunge
+
+##### M2
+
+- Madness
+- Magic
+- Magic Missile
+- Manifest
+- Manipulate
+- Mark
+- Master
+- Mayday
+- Measure
+- Mega
+- Megamorph
+- Melee
+- Mend
+- Merge
+- Merit
+- Mesmerize
+- Metamorph
+- Metamorphosis
+- Minimize
+- Mistake
+- Mix
+- Mobile
+- Modular
+- Modify
+- Monitor
+- Monstrosity
+- More Than Meets the Eye
+- Move
+- Multikicker
+- Murder
+- Muster
+
+##### N2
+
+- Ninjutsu
+
+##### O2
+
+- Outlast
+
+##### P2
+
+- Partner
+- Partner with
+
+##### Q2
+
+- Quest
+
+##### R2
+
+- Raid
+- Rally
+- Reach
+- Rebound
+- Recover
+- Recruit
+- Redeem
+- Regenerate
+- Renown
+- Requisition
+- Rescue
+- Retaliate
+- Retrace
+- Return
+- Reveal
+- Revitalize
+- Riot
+
+##### S2
+
+- Salvage
+- Scavenge
+- Scheme
+- Scry
+- Search
+- Secret
+- Shroud
+- Shuffle
+- Skulk
+- Slaughter
+- Smash
+- Sneak
+- Solidarity
+- Soulbond
+- Soulshift
+- Spectacle
+- Spellcraft
+- Spellshock
+- Splice
+- Split Second
+- Spread
+- Storm
+- Submerge
+- Substitute
+- Support
+- Surveil
+- Suspend
+
+##### T2
+
+- Tactics
+- Target
+- Team Up
+- Teamwork
+- Tenacity
+- Threshold
+- Token
+- Transform
+- Trap
+- Tribute
+- Trick
+- Trigger
+
+##### U2
+
+- Ultimatum
+- Underdog
+- Undying
+- Unearth
+- Unleash
+- Unstoppable
+
+##### V2
+
+- Valiant
+- Vanish
+- Vanquisher
+- Vendetta
+- Vigilance
+- Vindicate
+- Vortex
+- Voyage
+
+##### W2
+
+- Warcry
+- Warchief
+- Ward
+- Warp
+- Wasteland
+- Watch
+- Weaponize
+- Well
+- Whelm
+- Windfall
+- Wither
+
+##### X2
+
+- Xenograft
+
+##### Y2
+
+- Yoke
+- Youth
+
+##### Z2
+
+- Zenith
+- Zephyr
