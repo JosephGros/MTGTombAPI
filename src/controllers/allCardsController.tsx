@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Card from '../models/allCardsModel';
 
-export const getCardByName = async (req: Request, res: Response): Promise<void> => {
+export const getAllCards = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name } = req.query;
     if (!name) {
