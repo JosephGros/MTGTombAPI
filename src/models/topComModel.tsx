@@ -1,7 +1,8 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, PaginateModel } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 import { ICommanderBatch } from "../interfaces/ITopCom";
 
-const TopCommander: Schema = new Schema({
+const TopCommanderSchema: Schema = new Schema({
   batchName: { type: String, required: true },
   commanders: [
     {
@@ -13,8 +14,14 @@ const TopCommander: Schema = new Schema({
   ],
 });
 
-export default mongoose.model<ICommanderBatch & Document>(
-  "CommanderBatch",
-  TopCommander,
-  "topcommanders"
-);
+TopCommanderSchema.plugin(mongoosePaginate);
+
+interface ICommanderBatchModel
+  extends PaginateModel<ICommanderBatch & Document> {}
+
+const TopCommander = mongoose.model<
+  ICommanderBatch & Document,
+  ICommanderBatchModel
+>("CommanderBatch", TopCommanderSchema, "topcommanders");
+
+export default TopCommander;
