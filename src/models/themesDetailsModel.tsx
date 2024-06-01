@@ -4,8 +4,8 @@ interface IThemeDetails extends Document {
   name: string;
   criteria: {
     oracle_text: string[];
-    explanation: string;
   };
+  explanation: string;
   count: number;
   cardCount: number;
   commanderCards: string[];
@@ -15,8 +15,8 @@ const themeDetailsSchema = new Schema<IThemeDetails>({
   name: { type: String, required: true },
   criteria: {
     oracle_text: [String],
-    explanation: String,
   },
+  explanation: { type: String, required: true},
   count: { type: Number, required: true },
   cardCount: { type: Number, required: true },
   commanderCards: [String],

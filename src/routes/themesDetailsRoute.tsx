@@ -3,7 +3,7 @@ import { getAllThemes, getThemeDetails } from '../controllers/themesDetailsContr
 
 const themeDetailRouter = Router();
 
-themeDetailRouter.get('/theme/details', getThemeDetails);
+themeDetailRouter.get('/theme/details/:name', getThemeDetails);
 themeDetailRouter.get('/themes/details', getAllThemes);
 
 export default themeDetailRouter;
