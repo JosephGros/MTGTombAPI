@@ -24,8 +24,23 @@ const getThemeDetails = async (req: Request, res: Response): Promise<void> => {
 
 const getAllThemes = async (req: Request, res: Response): Promise<void> => {
   try {
-    const themes: IThemeDetails[] = await ThemeDetails.find();
-    res.status(200).json(themes);
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+
+    const themes: IThemeDetails[] = await ThemeDetails.find()
+      .skip(skip)
+      .limit(limit);
+
+    const total = await ThemeDetails.countDocuments();
+
+    res.status(200).json({
+      total,
+      page,
+      pageSize: themes.length,
+      totalPages: Math.ceil(total / limit),
+      themes,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
