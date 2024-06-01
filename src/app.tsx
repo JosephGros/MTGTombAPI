@@ -11,6 +11,7 @@ import deckRouter from './routes/deckRoutes';
 import actioWordsRouter from './routes/actionWordsRoute';
 import gameMechanicsRouter from './routes/gameMechanicsRoute';
 import allCardsRouter from './routes/allCardsRoute';
+import themeDetailRouter from './routes/themesDetailsRoute';
 
 const app = express();
 app.use(cors());
@@ -35,5 +36,6 @@ app.use('/api', deckRouter);
 app.use('/api', actioWordsRouter);
 app.use('/api', gameMechanicsRouter);
 app.use('/api', allCardsRouter);
+app.use('/api', themeDetailRouter);
 
 export default app;
