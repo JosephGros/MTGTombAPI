@@ -62,7 +62,6 @@ const findPrecon = (obj: any, filename: string): any => {
       }
       console.log(`Mapped to filename: ${preconFileName}`);
   
-      // Fetch all precons and search for the specific one
       const allPrecons = await Precon.find();
       let foundPrecon = null;
       for (const precon of allPrecons) {
