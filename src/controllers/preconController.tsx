@@ -15,9 +15,13 @@ const findDeckInNestedObject = (obj: any, name: string): any => {
   return null;
 };
 
-const seeAllPrecons = async () => {
-  const precons = await Precon.find();
-  return precons;
+const seeAllPrecons = async (page: number, limit: number, color: string) => {
+  const filter = color ? { color: color } : {};
+  const precons = await Precon.find(filter)
+    .skip((page - 1) * limit)
+    .limit(limit);
+  const totalPrecons = await Precon.countDocuments(filter);
+  return { precons, totalPrecons };
 };
 
 const seeOnePreconByName = async (name: string) => {
@@ -31,8 +35,16 @@ const seeOnePreconByName = async (name: string) => {
 
 export const getAllPrecons = async (req: Request, res: Response) => {
   try {
-    const precons = await seeAllPrecons();
-    res.json(precons);
+    const { page = 1, limit = 20, color = "" } = req.query;
+    const { precons, totalPrecons } = await seeAllPrecons(
+      parseInt(page as string),
+      parseInt(limit as string),
+      color as string
+    );
+    res.json({
+      precons,
+      totalPages: Math.ceil(totalPrecons / (limit as number)),
+    });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
