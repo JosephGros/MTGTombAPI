@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import Precon from "../models/preconModel";
+import PreconRelease from "../models/releasePreModel";
 
+// Recursive function to find the deck by name in a nested object structure
 const findDeckInNestedObject = (obj: any, name: string): any => {
   if (typeof obj !== "object" || obj === null) return null;
 
   for (const key in obj) {
-    if (key === name) {
+    // Check if the key includes the name (ignoring case and non-alphanumeric characters)
+    if (key.toLowerCase().includes(name.toLowerCase().replace(/[^a-z0-9]/gi, ''))) {
       return { name: key, precon: obj[key] };
     } else if (typeof obj[key] === "object") {
       const result = findDeckInNestedObject(obj[key], name);
@@ -15,36 +17,58 @@ const findDeckInNestedObject = (obj: any, name: string): any => {
   return null;
 };
 
-const seeAllPrecons = async (page: number, limit: number, color: string) => {
-  const filter = color ? { color: color } : {};
-  const precons = await Precon.find(filter)
-    .skip((page - 1) * limit)
-    .limit(limit);
-  const totalPrecons = await Precon.countDocuments(filter);
-  return { precons, totalPrecons };
+const seeAllPrecons = async () => {
+  const preconRelease = await PreconRelease.findOne();
+  return preconRelease;
 };
 
 const seeOnePreconByName = async (name: string) => {
-  const allPrecons = await Precon.find();
-  for (const precon of allPrecons) {
-    const found = findDeckInNestedObject(precon.toJSON(), name);
-    if (found) return found;
+  const preconRelease = await seeAllPrecons();
+  if (!preconRelease) return null;
+
+  for (const year of preconRelease.years) {
+    for (const yearKey in year) {
+      const sets:any = year[yearKey];
+      for (const setKey in sets) {
+        const decks = sets[setKey].decks;
+        if (decks) {
+          const found = findDeckInNestedObject(decks, name);
+          if (found) return found;
+        }
+      }
+    }
   }
   return null;
 };
 
 export const getAllPrecons = async (req: Request, res: Response) => {
   try {
-    const { page = 1, limit = 20, color = "" } = req.query;
-    const { precons, totalPrecons } = await seeAllPrecons(
-      parseInt(page as string),
-      parseInt(limit as string),
-      color as string
-    );
-    res.json({
-      precons,
-      totalPages: Math.ceil(totalPrecons / (limit as number)),
+    const preconRelease = await seeAllPrecons();
+    if (!preconRelease) {
+      res.status(404).json({ message: "Preconstructed releases not found" });
+      return;
+    }
+
+    const preconNames: { year: string; sets: { [key: string]: { title: string; decks: string[] } } }[] = [];
+
+    preconRelease.years.forEach((yearObj: any) => {
+      Object.keys(yearObj).forEach((year) => {
+        const sets = yearObj[year];
+        const formattedSets: { [key: string]: { title: string; decks: string[] } } = {};
+
+        Object.keys(sets).forEach((setKey) => {
+          const set = sets[setKey];
+          formattedSets[setKey] = {
+            title: set.title,
+            decks: Object.keys(set.decks)
+          };
+        });
+
+        preconNames.push({ year, sets: formattedSets });
+      });
     });
+
+    res.status(200).json(preconNames);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
