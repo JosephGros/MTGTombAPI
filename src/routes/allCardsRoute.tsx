@@ -5,6 +5,6 @@ const allCardsRouter: Router = Router();
 
 allCardsRouter.get('/allcards', getAllCards);
 allCardsRouter.get('/allcards/:name', getOneCard);
-allCardsRouter.get('/cards/by-names', getCardsByNames);
+allCardsRouter.post('/cards/by-names', getCardsByNames);
 
 export default allCardsRouter;
