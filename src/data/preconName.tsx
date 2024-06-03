@@ -146,18 +146,10 @@ const preconNameLookup: { [key: string]: string } = {
   "Feline Fury": "(SLD)---Feline-Fury.json",
   "Doggy Dilemma": "(SLD)---Doggy-Dilemma.json",
   "Paws and Effect": "(SLD)---Paws-and-Effect.json",
-  "Graveyard Overdrive": "(MH3)---Graveyard-Overdrive.json",
-  "Graveyard Overdrive Collector's Edition":
-    "(MH3)---Graveyard-Overdrive-Collectors-Edition.json",
-  "Tricky Terrain": "(MH3)---Tricky-Terrain.json",
-  "Tricky Terrain Collector's Edition":
-    "(MH3)---Tricky-Terrain-Collectors-Edition.json",
-  "Creative Energy": "(MH3)---Creative-Energy.json",
-  "Creative Energy Collector's Edition":
-    "(MH3)---Creative-Energy-Collectors-Edition.json",
-  "Eldrazi Incursion": "(MH3)---Eldrazi-Incursion.json",
-  "Eldrazi Incursion Collector's Edition":
-    "(MH3)---Eldrazi-Incursion-Collectors-Edition.json",
+  "Graveyard Overdrive": "(M3C)---Graveyard-Overdrive.json",
+  "Tricky Terrain": "(M3C)---Tricky-Terrain.json",
+  "Creative Energy": "(M3C)---Creative-Energy.json",
+  "Eldrazi Incursion": "(M3C)---Eldrazi-Incursion.json",
 };
 
 export default preconNameLookup;
